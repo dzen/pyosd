@@ -60,9 +60,9 @@ if __name__ == "__main__":
     args = []
     kwargs = {'shadow': 0}
 
-    pyosd.daemon.top = apply(pyosd.osd, args, kwargs)
+    pyosd.daemon.top = pyosd.osd(*args, **kwargs)
     pyosd.daemon.top.set_pos(pyosd.POS_TOP)
-    pyosd.daemon.bot = apply(pyosd.osd, args, kwargs)
+    pyosd.daemon.bot = pyosd.osd(*args, **kwargs)
     pyosd.daemon.bot.set_pos(pyosd.POS_BOT)
 
     pyosd.daemon.top.set_outline_offset(1)
@@ -75,14 +75,14 @@ if __name__ == "__main__":
         for f in files:
             try:
                 namespace = {}
-                execfile(os.path.join(MODULES_DIR, f), namespace)
+                exec(compile(open(os.path.join(MODULES_DIR, f)).read(), os.path.join(MODULES_DIR, f), 'exec'), namespace)
                 c = namespace['plugin']()
             except:
-                print "Unable to load module: %s" % f
+                print("Unable to load module: %s" % f)
                 error=1
 
             if not error:
-                print "Adding plugin: %s" % f
+                print("Adding plugin: %s" % f)
                 for k in c.plugin_keys:
                     modules[k] = c
 
@@ -97,15 +97,15 @@ if __name__ == "__main__":
             s = string.split(line)
 
             if not s:
-                print "Not s"
+                print("Not s")
                 return
 
             cmd = s[0]
 
-            if PyOSDServ.modules.has_key(cmd):
-                apply(getattr(PyOSDServ.modules[cmd], cmd), s[1:])
+            if cmd in PyOSDServ.modules:
+                getattr(PyOSDServ.modules[cmd], cmd)(*s[1:])
             else:
-                print "Unknown command: %s" % line
+                print("Unknown command: %s" % line)
 
 
     factory = Factory()
@@ -114,7 +114,7 @@ if __name__ == "__main__":
     pyosd.daemon.reactor = reactor
 
     if allinterfaces:
-        print "Binding to all interfaces.."
+        print("Binding to all interfaces..")
         reactor.listenTCP(8007, factory) #, interface='127.0.0.1')
     else:
         reactor.listenTCP(8007, factory, interface='127.0.0.1')

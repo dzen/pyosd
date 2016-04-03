@@ -121,7 +121,7 @@ class osd:
         """
 
         if line >= self.get_number_lines() or line < 0:
-            raise ValueError, "specified line is out of range"
+            raise ValueError("specified line is out of range")
 
         if type==TYPE_STRING:
             _pyosd.display_string(self._osd, line, arg)
@@ -133,7 +133,7 @@ class osd:
             _pyosd.display_slider(self._osd, line, int(arg))
 
         else:
-            raise ValueError, "type not in list of valid values!"
+            raise ValueError("type not in list of valid values!")
 
     def set_font(self, font):
         """Change the font.
@@ -208,7 +208,7 @@ class osd:
     def scroll(self, lines=1):
         """Scroll the display."""
         if lines >= self.get_number_lines() or lines < 0:
-            raise ValueError, "specified line is out of range"
+            raise ValueError("specified line is out of range")
         _pyosd.scroll(self._osd, lines)
 
     def hide(self):
