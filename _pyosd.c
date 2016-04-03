@@ -19,6 +19,9 @@
 #include <signal.h>
 #include <xosd.h>
 
+#define OSD_CAPSULE_NAME "pyosd"
+
+
 // raised if there's an error in the underlying library (such as X not running)
 static PyObject *pyosd_error;
 
@@ -74,20 +77,50 @@ static PyMethodDef pyosd_methods[] = {
     {NULL,  NULL}
 };
 
+#if PY_MAJOR_VERSION >= 3
+
+static struct PyModuleDef moduledef = {
+        PyModuleDef_HEAD_INIT,
+        "pyosd",
+        NULL,
+        NULL,
+        pyosd_methods,
+        NULL,
+        NULL,
+        NULL,
+        NULL
+};
+
+#define INITERROR return NULL
+
+PyObject *
+PyInit__pyosd(void)
+
+#else
+#define INITERROR return
+
 void
 init_pyosd(void)
+#endif
 {
   PyObject *self;
   PyObject *dict;
 
   // create the module and add the functions
+#if PY_MAJOR_VERSION < 3
   self = Py_InitModule("_pyosd", pyosd_methods);
-
+#else
+  self = PyModule_Create(&moduledef);
+#endif
   // init custom exception
   dict = PyModule_GetDict(self);
 
   pyosd_error = PyErr_NewException("pyosd.error", NULL, NULL);
   PyDict_SetItemString(dict, "error", pyosd_error);
+
+#if PY_MAJOR_VERSION >= 3
+  return self;
+#endif
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -147,7 +180,11 @@ pyosd_init(PyObject *self, PyObject *args)
 
   // we've now got a osd reference, which we need to package up and return
   // to the surrounding python code
+ #if PY_MAJOR_VERSION < 3
   pyc_osd = PyCObject_FromVoidPtr((void *)osd, NULL);
+#else
+  pyc_osd = PyCapsule_New((void *)osd, OSD_CAPSULE_NAME, NULL);
+#endif 
 
   return pyc_osd;
 }
@@ -161,7 +198,11 @@ pyosd_deinit(PyObject *self, PyObject *args)
   if(!PyArg_ParseTuple(args, "O", &pyc_osd))
     return NULL;
 
+#if PY_MAJOR_VERSION < 3
   osd = (xosd *)PyCObject_AsVoidPtr(pyc_osd);
+#else
+  osd = (xosd *)PyCapsule_GetPointer(pyc_osd, OSD_CAPSULE_NAME);
+#endif
 
   if(osd==NULL) {
     PyErr_SetString(pyosd_error, "Already deinitialised");
@@ -190,7 +231,11 @@ pyosd_display_string(PyObject *self, PyObject *args)
   if(!PyArg_ParseTuple(args, "Ois", &pyc_osd, &line, &str))
     return NULL;
 
+#if PY_MAJOR_VERSION < 3
   osd = (xosd *)PyCObject_AsVoidPtr(pyc_osd);
+#else
+  osd = (xosd *)PyCapsule_GetPointer(pyc_osd, OSD_CAPSULE_NAME);
+#endif
 
   if(!assert_osd(osd, "Run init() first!"))
     return NULL;
@@ -214,7 +259,11 @@ pyosd_display_perc(PyObject *self, PyObject *args)
   if(!PyArg_ParseTuple(args, "Oii", &pyc_osd, &line, &perc))
     return NULL;
 
+#if PY_MAJOR_VERSION < 3
   osd = (xosd *)PyCObject_AsVoidPtr(pyc_osd);
+#else
+  osd = (xosd *)PyCapsule_GetPointer(pyc_osd, OSD_CAPSULE_NAME);
+#endif
 
   if(!assert_osd(osd, "Run init() first!"))
     return NULL;
@@ -237,7 +286,11 @@ pyosd_display_slider(PyObject *self, PyObject *args)
   if(!PyArg_ParseTuple(args, "Oii", &pyc_osd, &line, &slider))
     return NULL;
 
+#if PY_MAJOR_VERSION < 3
   osd = (xosd *)PyCObject_AsVoidPtr(pyc_osd);
+#else
+  osd = (xosd *)PyCapsule_GetPointer(pyc_osd, OSD_CAPSULE_NAME);
+#endif
 
   if(!assert_osd(osd, "Run init() first!"))
     return NULL;
@@ -259,7 +312,11 @@ pyosd_set_font(PyObject *self, PyObject *args)
   if(!PyArg_ParseTuple(args, "Os", &pyc_osd, &font))
     return NULL;
 
+#if PY_MAJOR_VERSION < 3
   osd = (xosd *)PyCObject_AsVoidPtr(pyc_osd);
+#else
+  osd = (xosd *)PyCapsule_GetPointer(pyc_osd, OSD_CAPSULE_NAME);
+#endif
 
   if(!assert_osd(osd, "Run init() first!"))
     return NULL;
@@ -285,7 +342,12 @@ pyosd_set_colour(PyObject *self, PyObject *args)
   if(!PyArg_ParseTuple(args, "Os", &pyc_osd, &colour))
     return NULL;
 
+#if PY_MAJOR_VERSION < 3
   osd = (xosd *)PyCObject_AsVoidPtr(pyc_osd);
+#else
+  osd = (xosd *)PyCapsule_GetPointer(pyc_osd, OSD_CAPSULE_NAME);
+#endif
+
 
   if(!assert_osd(osd, "Run init() first!"))
     return NULL;
@@ -306,7 +368,11 @@ pyosd_set_timeout(PyObject *self, PyObject *args)
   if(!PyArg_ParseTuple(args, "Oi", &pyc_osd, &timeout))
     return NULL;
 
+#if PY_MAJOR_VERSION < 3
   osd = (xosd *)PyCObject_AsVoidPtr(pyc_osd);
+#else
+  osd = (xosd *)PyCapsule_GetPointer(pyc_osd, OSD_CAPSULE_NAME);
+#endif
 
   if(!assert_osd(osd, "Run init() first!"))
     return NULL;
@@ -329,7 +395,11 @@ pyosd_set_pos(PyObject *self, PyObject *args)
   if(!PyArg_ParseTuple(args, "Oi", &pyc_osd, &pos))
     return NULL;
 
+#if PY_MAJOR_VERSION < 3
   osd = (xosd *)PyCObject_AsVoidPtr(pyc_osd);
+#else
+  osd = (xosd *)PyCapsule_GetPointer(pyc_osd, OSD_CAPSULE_NAME);
+#endif
 
   if(!assert_osd(osd, "Run init() first!"))
     return NULL;
@@ -363,7 +433,11 @@ pyosd_set_align(PyObject *self, PyObject *args)
   if(!PyArg_ParseTuple(args, "Oi", &pyc_osd, &align))
     return NULL;
 
+#if PY_MAJOR_VERSION < 3
   osd = (xosd *)PyCObject_AsVoidPtr(pyc_osd);
+#else
+  osd = (xosd *)PyCapsule_GetPointer(pyc_osd, OSD_CAPSULE_NAME);
+#endif
 
   if(!assert_osd(osd, "Run init() first!"))
     return NULL;
@@ -395,7 +469,11 @@ pyosd_set_bar_length(PyObject *self, PyObject *args)
   if(!PyArg_ParseTuple(args, "Oi", &pyc_osd, &bar_length))
     return NULL;
 
+#if PY_MAJOR_VERSION < 3
   osd = (xosd *)PyCObject_AsVoidPtr(pyc_osd);
+#else
+  osd = (xosd *)PyCapsule_GetPointer(pyc_osd, OSD_CAPSULE_NAME);
+#endif
 
   if(!assert_osd(osd, "Run init() first!"))
     return NULL;
@@ -416,7 +494,11 @@ pyosd_set_vertical_offset(PyObject *self, PyObject *args)
   if(!PyArg_ParseTuple(args, "Oi", &pyc_osd, &offset))
     return NULL;
 
+#if PY_MAJOR_VERSION < 3
   osd = (xosd *)PyCObject_AsVoidPtr(pyc_osd);
+#else
+  osd = (xosd *)PyCapsule_GetPointer(pyc_osd, OSD_CAPSULE_NAME);
+#endif
 
   if(!assert_osd(osd, "Run init() first!"))
     return NULL;
@@ -437,7 +519,11 @@ pyosd_set_horizontal_offset(PyObject *self, PyObject *args)
   if(!PyArg_ParseTuple(args, "Oi", &pyc_osd, &offset))
     return NULL;
 
+#if PY_MAJOR_VERSION < 3
   osd = (xosd *)PyCObject_AsVoidPtr(pyc_osd);
+#else
+  osd = (xosd *)PyCapsule_GetPointer(pyc_osd, OSD_CAPSULE_NAME);
+#endif
 
   if(!assert_osd(osd, "Run init() first!"))
     return NULL;
@@ -458,7 +544,11 @@ pyosd_set_shadow_colour(PyObject *self, PyObject *args)
   if(!PyArg_ParseTuple(args, "Os", &pyc_osd, &colour))
     return NULL;
 
+#if PY_MAJOR_VERSION < 3
   osd = (xosd *)PyCObject_AsVoidPtr(pyc_osd);
+#else
+  osd = (xosd *)PyCapsule_GetPointer(pyc_osd, OSD_CAPSULE_NAME);
+#endif
 
   if(!assert_osd(osd, "Run init() first!"))
     return NULL;
@@ -479,7 +569,11 @@ pyosd_set_shadow_offset(PyObject *self, PyObject *args)
   if(!PyArg_ParseTuple(args, "Oi", &pyc_osd, &offset))
     return NULL;
 
+#if PY_MAJOR_VERSION < 3
   osd = (xosd *)PyCObject_AsVoidPtr(pyc_osd);
+#else
+  osd = (xosd *)PyCapsule_GetPointer(pyc_osd, OSD_CAPSULE_NAME);
+#endif
 
   if(!assert_osd(osd, "Run init() first!"))
     return NULL;
@@ -500,7 +594,11 @@ pyosd_set_outline_offset(PyObject *self, PyObject *args)
   if(!PyArg_ParseTuple(args, "Oi", &pyc_osd, &offset))
     return NULL;
 
+#if PY_MAJOR_VERSION < 3
   osd = (xosd *)PyCObject_AsVoidPtr(pyc_osd);
+#else
+  osd = (xosd *)PyCapsule_GetPointer(pyc_osd, OSD_CAPSULE_NAME);
+#endif
 
   if(!assert_osd(osd, "Run init() first!"))
     return NULL;
@@ -521,7 +619,11 @@ pyosd_set_outline_colour(PyObject *self, PyObject *args)
   if(!PyArg_ParseTuple(args, "Os", &pyc_osd, &colour))
     return NULL;
 
+#if PY_MAJOR_VERSION < 3
   osd = (xosd *)PyCObject_AsVoidPtr(pyc_osd);
+#else
+  osd = (xosd *)PyCapsule_GetPointer(pyc_osd, OSD_CAPSULE_NAME);
+#endif
 
   if(!assert_osd(osd, "Run init() first!"))
     return NULL;
@@ -542,7 +644,11 @@ pyosd_scroll(PyObject *self, PyObject *args)
   if(!PyArg_ParseTuple(args, "Oi", &pyc_osd, &amount))
     return NULL;
 
+#if PY_MAJOR_VERSION < 3
   osd = (xosd *)PyCObject_AsVoidPtr(pyc_osd);
+#else
+  osd = (xosd *)PyCapsule_GetPointer(pyc_osd, OSD_CAPSULE_NAME);
+#endif
 
   if(!assert_osd(osd, "Run init() first!"))
     return NULL;
@@ -562,7 +668,11 @@ pyosd_hide(PyObject *self, PyObject *args)
   if(!PyArg_ParseTuple(args, "O", &pyc_osd))
     return NULL;
 
+#if PY_MAJOR_VERSION < 3
   osd = (xosd *)PyCObject_AsVoidPtr(pyc_osd);
+#else
+  osd = (xosd *)PyCapsule_GetPointer(pyc_osd, OSD_CAPSULE_NAME);
+#endif
 
   if(!assert_osd(osd, "Run init() first!"))
     return NULL;
@@ -582,7 +692,11 @@ pyosd_show(PyObject *self, PyObject *args)
   if(!PyArg_ParseTuple(args, "O", &pyc_osd))
     return NULL;
 
+#if PY_MAJOR_VERSION < 3
   osd = (xosd *)PyCObject_AsVoidPtr(pyc_osd);
+#else
+  osd = (xosd *)PyCapsule_GetPointer(pyc_osd, OSD_CAPSULE_NAME);
+#endif
 
   if(!assert_osd(osd, "Run init() first!"))
     return NULL;
@@ -602,7 +716,11 @@ pyosd_wait_until_no_display(PyObject *self, PyObject *args)
   if(!PyArg_ParseTuple(args, "O", &pyc_osd))
     return NULL;
 
+#if PY_MAJOR_VERSION < 3
   osd = (xosd *)PyCObject_AsVoidPtr(pyc_osd);
+#else
+  osd = (xosd *)PyCapsule_GetPointer(pyc_osd, OSD_CAPSULE_NAME);
+#endif
 
   if(!assert_osd(osd, "Run init() first!"))
     return NULL;
@@ -622,7 +740,11 @@ pyosd_is_onscreen(PyObject *self, PyObject *args)
   if(!PyArg_ParseTuple(args, "O", &pyc_osd))
     return NULL;
 
+#if PY_MAJOR_VERSION < 3
   osd = (xosd *)PyCObject_AsVoidPtr(pyc_osd);
+#else
+  osd = (xosd *)PyCapsule_GetPointer(pyc_osd, OSD_CAPSULE_NAME);
+#endif
 
   if(!assert_osd(osd, "Run init() first!"))
     return NULL;
@@ -640,7 +762,11 @@ pyosd_get_number_lines(PyObject *self, PyObject *args)
   if(!PyArg_ParseTuple(args, "O", &pyc_osd))
     return NULL;
 
+#if PY_MAJOR_VERSION < 3
   osd = (xosd *)PyCObject_AsVoidPtr(pyc_osd);
+#else
+  osd = (xosd *)PyCapsule_GetPointer(pyc_osd, OSD_CAPSULE_NAME);
+#endif
 
   if(!assert_osd(osd, "Run init() first!"))
     return NULL;
