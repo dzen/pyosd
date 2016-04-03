@@ -1,0 +1,140 @@
+
+<!doctype html public "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module pyosd</title>
+<style type="text/css"><!--
+TT { font-family: lucidatypewriter, lucida console, courier }
+--></style></head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0>
+<tr bgcolor="#7799ee">
+<td valign=bottom><small>&nbsp;<br></small
+><font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>pyosd</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/resolve/Code/pyosd/pyosd.py">/home/resolve/Code/pyosd/pyosd.py</a></font></td></tr></table>
+    <p><small><tt>pyosd&nbsp;-&nbsp;a&nbsp;wrapper&nbsp;of&nbsp;libxosd&nbsp;which&nbsp;allows&nbsp;the&nbsp;displaying&nbsp;of&nbsp;"on&nbsp;screen&nbsp;display"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;messages.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;example&nbsp;usage:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;import&nbsp;pyosd<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;p&nbsp;=&nbsp;pyosd.<a href="#osd">osd</a>()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;#&nbsp;try&nbsp;fixed&nbsp;if&nbsp;the&nbsp;default_font&nbsp;gives&nbsp;you&nbsp;an&nbsp;<a href="#error">error</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;p.display("eschew&nbsp;obfuscation")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;p.set_pos(pyosd.POS_BOT)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;p.display("this&nbsp;will&nbsp;be&nbsp;down&nbsp;the&nbsp;bottom.")<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;..&nbsp;etc.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Multiple&nbsp;instances&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;display&nbsp;information&nbsp;in&nbsp;different<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fonts&nbsp;or&nbsp;colours&nbsp;across&nbsp;the&nbsp;screen.</tt></small></p>
+
+<p><table width="100%" cellspacing=0 cellpadding=2 border=0>
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom><small><small>&nbsp;<br></small></small
+><font color="#fffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;&nbsp;</td>
+<td width="100%"><table width="100%"><tr><td width="25%" valign=top><a href="_pyosd.html">_pyosd</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table>
+<p><table width="100%" cellspacing=0 cellpadding=2 border=0>
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom><small><small>&nbsp;<br></small></small
+><font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><small><a href="exceptions.html#Exception">exceptions.Exception</a>
+</small></font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><small><a href="pyosd.html#error">error</a>
+</small></font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><small><a href="pyosd.html#osd">osd</a>
+</small></font></dt></dl>
+ 
+<p><table width="100%" cellspacing=0 cellpadding=2 border=0>
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom><small><small>&nbsp;<br></small></small
+><font color="#000000" face="helvetica, arial"><a name="error">class <strong>error</strong></a>(<a href="exceptions.html#Exception">exceptions.Exception</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><small><small>&nbsp;</small></small></td></tr>
+<tr><td>&nbsp;&nbsp;</td>
+<td width="100%"><dl><dt><a name="error-__getitem__"><strong>__getitem__</strong></a>(...)<small><font color="#909090"><font face="helvetica, arial"> from <a href="exceptions.html#Exception">exceptions.Exception</a></font></font></small></dl>
+<dl><dt><a name="error-__init__"><strong>__init__</strong></a>(...)<small><font color="#909090"><font face="helvetica, arial"> from <a href="exceptions.html#Exception">exceptions.Exception</a></font></font></small></dl>
+<dl><dt><a name="error-__str__"><strong>__str__</strong></a>(...)<small><font color="#909090"><font face="helvetica, arial"> from <a href="exceptions.html#Exception">exceptions.Exception</a></font></font></small></dl>
+</td></tr></table> 
+<p><table width="100%" cellspacing=0 cellpadding=2 border=0>
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom><small><small>&nbsp;<br></small></small
+><font color="#000000" face="helvetica, arial"><a name="osd">class <strong>osd</strong></a></font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><small><tt>&nbsp;<a href="#osd">osd</a>&nbsp;is&nbsp;a&nbsp;class&nbsp;used&nbsp;to&nbsp;create&nbsp;an&nbsp;object&nbsp;which&nbsp;can&nbsp;display&nbsp;messages&nbsp;on<br>
+the&nbsp;screen.<br>&nbsp;</tt></small></td></tr>
+<tr><td>&nbsp;&nbsp;</td>
+<td width="100%"><dl><dt><a name="osd-__del__"><strong>__del__</strong></a>(self)<dd><small><tt>&nbsp;Shut&nbsp;down&nbsp;and&nbsp;clean&nbsp;up.<br>
+&nbsp;<br>
+Note&nbsp;that&nbsp;init()&nbsp;will&nbsp;automatically&nbsp;do&nbsp;this&nbsp;step&nbsp;if&nbsp;necessary.</tt></small></dl>
+<dl><dt><a name="osd-__init__"><strong>__init__</strong></a>(self, font<small><font color="#909090">='-adobe-helvetica-medium-r-normal-*-*-400-*-*-p-*-iso8859-1'</font></small>, colour<small><font color="#909090">='#FFFFFF'</font></small>, timeout<small><font color="#909090">=3</font></small>, pos<small><font color="#909090">=0</font></small>, offset<small><font color="#909090">=0</font></small>, shadow<small><font color="#909090">=0</font></small>, lines<small><font color="#909090">=2</font></small>)<dd><small><tt>&nbsp;Initialise&nbsp;the&nbsp;OSD&nbsp;library.<br>
+&nbsp;<br>
+This&nbsp;must&nbsp;be&nbsp;done&nbsp;before&nbsp;<a href="#osd-display">display</a>()&nbsp;will&nbsp;work.&nbsp;It&nbsp;will&nbsp;automatically<br>
+deinit&nbsp;if&nbsp;necessary.<br>
+&nbsp;<br>
+font(pyosd.default_font):&nbsp;standard&nbsp;string-style&nbsp;X&nbsp;font&nbsp;description<br>
+colour('#FFFFFF'):&nbsp;standard&nbsp;string-style&nbsp;X&nbsp;colour&nbsp;description<br>
+timeout(3):&nbsp;number&nbsp;of&nbsp;seconds&nbsp;to&nbsp;remain&nbsp;on&nbsp;screen&nbsp;(-1&nbsp;for&nbsp;infinite)<br>
+pos(POS_TOP):&nbsp;position,&nbsp;one&nbsp;of&nbsp;POS_TOP&nbsp;or&nbsp;POS_BOT<br>
+offset(0):&nbsp;vertical&nbsp;offset&nbsp;from&nbsp;pos<br>
+shadow(0):&nbsp;black&nbsp;shadow&nbsp;size<br>
+lines(2):&nbsp;the&nbsp;max&nbsp;number&nbsp;of&nbsp;lines&nbsp;available&nbsp;to&nbsp;display&nbsp;at&nbsp;once<br>
+&nbsp;<br>
+Unfortunately&nbsp;due&nbsp;to&nbsp;constraints&nbsp;with&nbsp;the&nbsp;underlying&nbsp;library,&nbsp;lines&nbsp;has<br>
+to&nbsp;be&nbsp;hard&nbsp;coded&nbsp;on&nbsp;init()&nbsp;at&nbsp;the&nbsp;moment.</tt></small></dl>
+<dl><dt><a name="osd-display"><strong>display</strong></a>(self, arg, type<small><font color="#909090">=0</font></small>, line<small><font color="#909090">=0</font></small>)<dd><small><tt>&nbsp;Display&nbsp;a&nbsp;string/bargraph/percentage&nbsp;using&nbsp;information&nbsp;from&nbsp;init()<br>
+&nbsp;<br>
+arg:&nbsp;a&nbsp;string&nbsp;or&nbsp;integer&nbsp;from&nbsp;1-100,&nbsp;depending&nbsp;on&nbsp;the&nbsp;type<br>
+--&nbsp;defaults&nbsp;--<br>
+type(TYPE_STRING):&nbsp;one&nbsp;of&nbsp;TYPE_STRING,&nbsp;TYPE_PERCENT,&nbsp;or&nbsp;TYPE_SLIDER<br>
+line(0):&nbsp;the&nbsp;line&nbsp;to&nbsp;display&nbsp;text&nbsp;on<br>
+&nbsp;<br>
+The&nbsp;underlying&nbsp;library&nbsp;currently&nbsp;doesn't&nbsp;zero&nbsp;out&nbsp;previous&nbsp;lines&nbsp;that<br>
+aren't&nbsp;being&nbsp;used,&nbsp;so&nbsp;if&nbsp;you&nbsp;wish&nbsp;to&nbsp;display&nbsp;something&nbsp;on,&nbsp;say,&nbsp;line&nbsp;1,<br>
+make&nbsp;sure&nbsp;you&nbsp;simultaneously&nbsp;display&nbsp;""&nbsp;on&nbsp;line&nbsp;0.</tt></small></dl>
+<dl><dt><a name="osd-set_colour"><strong>set_colour</strong></a>(self, c)<dd><small><tt>&nbsp;Change&nbsp;the&nbsp;colour.<br>
+&nbsp;<br>
+This&nbsp;will&nbsp;update&nbsp;when&nbsp;<a href="#osd-display">display</a>()&nbsp;is&nbsp;next&nbsp;called.</tt></small></dl>
+<dl><dt><a name="osd-set_font"><strong>set_font</strong></a>(self, font)<dd><small><tt>&nbsp;Change&nbsp;the&nbsp;font.<br>
+&nbsp;<br>
+This&nbsp;takes&nbsp;effect&nbsp;immediately.</tt></small></dl>
+<dl><dt><a name="osd-set_offset"><strong>set_offset</strong></a>(self, o)<dd><small><tt>&nbsp;Change&nbsp;the&nbsp;vertical&nbsp;offset&nbsp;from&nbsp;the&nbsp;top&nbsp;or&nbsp;bottom.<br>
+&nbsp;<br>
+This&nbsp;change&nbsp;is&nbsp;immediate.</tt></small></dl>
+<dl><dt><a name="osd-set_pos"><strong>set_pos</strong></a>(self, p)<dd><small><tt>&nbsp;Change&nbsp;the&nbsp;position&nbsp;to&nbsp;the&nbsp;top&nbsp;or&nbsp;bottom.<br>
+&nbsp;<br>
+This&nbsp;change&nbsp;is&nbsp;immediate.</tt></small></dl>
+<dl><dt><a name="osd-set_shadow_offset"><strong>set_shadow_offset</strong></a>(self, o)<dd><small><tt>&nbsp;Set&nbsp;the&nbsp;offset&nbsp;of&nbsp;the&nbsp;shadow.<br>
+&nbsp;<br>
+This&nbsp;change&nbsp;will&nbsp;take&nbsp;effect&nbsp;on&nbsp;the&nbsp;next&nbsp;<a href="#osd-display">display</a>()</tt></small></dl>
+<dl><dt><a name="osd-set_timeout"><strong>set_timeout</strong></a>(self, t)<dd><small><tt>&nbsp;Change&nbsp;the&nbsp;timeout.<br>
+&nbsp;<br>
+This&nbsp;takes&nbsp;effect&nbsp;immediately;&nbsp;anything&nbsp;that&nbsp;is&nbsp;currently&nbsp;displayed<br>
+will&nbsp;wait&nbsp;the&nbsp;new&nbsp;timeout&nbsp;time&nbsp;before&nbsp;clearing.</tt></small></dl>
+</td></tr></table></td></tr></table>
+<p><table width="100%" cellspacing=0 cellpadding=2 border=0>
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom><small><small>&nbsp;<br></small></small
+><font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;&nbsp;</td>
+<td width="100%"><strong>POS_BOT</strong> = 1<br>
+<strong>POS_TOP</strong> = 0<br>
+<strong>TYPE_PERCENT</strong> = 1<br>
+<strong>TYPE_SLIDER</strong> = 2<br>
+<strong>TYPE_STRING</strong> = 0<br>
+<strong>__file__</strong> = './pyosd.py'<br>
+<strong>__name__</strong> = 'pyosd'<br>
+<strong>default_font</strong> = '-adobe-helvetica-medium-r-normal-*-*-400-*-*-p-*-iso8859-1'</td></tr></table>
+</body></html>

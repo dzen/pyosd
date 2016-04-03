@@ -1,0 +1,45 @@
+2002-01-08  Damien Elmes  <pyosd@repose.cx>
+
+	* pyosd.py 1.4: oops, forgot to update the module docstring
+
+	* README 1.3: updated to reflect new API and version number.
+
+	* _pyosd.c 1.4:
+	* fixed a nasty bug which cropped up when readline was being used in the
+	  interactive interpreter. SIGINT is now blocked in the xosd library.
+
+	* pyosd.py 1.3:
+	* added defaults for the remaining args to __init__. who knows why i did not do
+	  it earlier.
+
+2002-01-02  Damien Elmes  <pyosd@repose.cx>
+
+	* README 1.2:
+	* oops. the different line should read "fixed", not the same as the original.
+
+	* README 1.1: New file.
+
+	* pyosd.py 1.2: * got rid of some trailing spaces in the source file.
+
+	* pyosd.py 1.1: New file.
+
+	* _pyosd.c 1.3:
+	* added a bunch of set methods so that everything except lines can be changed
+	on the fly now
+
+	* most functions pass around a xosd * now instead of using a global one. this
+	allows a bunch of different class instances to display different stuff at once
+
+2001-12-19  Damien Elmes  <pyosd@repose.cx>
+
+	* _pyosd.c 1.2:
+	* _pyosd.c should now raise an exception if libxosd fails to init
+
+2001-12-11  Damien Elmes  <pyosd@repose.cx>
+
+	* _pyosd.c 1.1: New file.
+
+2001-12-07  Damien Elmes  <pyosd@repose.cx>
+
+	* pyosd.c 1.1: New file.
+

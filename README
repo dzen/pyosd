@@ -1,0 +1,90 @@
+PyOSD: A python wrapper for libxosd
+-----------------------------------
+
+Description
+-----------
+
+     PyOSD is a python module for displaying text on your X display,
+     much like the "On Screen Displays" used on TVs and some monitors.
+
+     This is useful for such things as displaying the currently
+     playing song in your media player.
+
+Installation
+------------
+
+    PyOSD will now run out of the box provided you have xosd version 1.0.0 or
+    later. So fetch and install that first. You can find xosd here:
+
+        http://www.ignavus.net/software.html
+
+    Installing pyosd
+    ----------------
+
+    All you need here is distutils, which is packaged with recent pythons. If
+    you're using debian, install python2.1-dev (or your preferred version)
+
+    People with a umask that doesn't allow files to be world readable have
+    reported permission problems installing these files. If you're installing
+    via sudo the umask will be inherited - make sure
+    site-packages/{_pyosd.so,pyosd*/*} are world readable. 
+
+    Then:
+
+    $ python setup.py build
+
+    (then as root)
+
+    # python setup.py install
+
+    ** NOTE **
+
+    If you were previously using an older version of pyosd and didn't
+    uninstall it first, you may have difficulty using the new version. The
+    solution to that is to run a command like this:
+
+    $ rm /usr/lib/python2.1/site-packages/pyosd.py
+
+    Since pyosd is now a directory.
+
+How to use
+----------
+
+     Here's an example python session with the basics:
+
+     $ python
+     ...
+     >>> import pyosd
+     >>> p = pyosd.osd()
+     >>> p.display("this is a message")
+     >>> p.set_pos(pyosd.POS_BOT)
+     >>> p.display("this will be down the bottom")
+
+     That code should display a message at the top of your screen, and then
+     another at the bottom. If you receive an error, it's possible you don't
+     have that font. You can try a line like this instead:
+
+     >>> p = pyosd.osd("fixed", "white")
+
+     The default font is:
+
+     >>> pyosd.default_font
+     '-adobe-helvetica-medium-r-normal-*-*-400-*-*-p-*-iso8859-1'
+
+     When you use pyosd in a script, you need to make it wait for your
+     message to be displayed. To do this, try:
+
+     >>> p.wait_until_no_display()
+     
+     You can read more about the inteface by looking at pyosd.html
+
+Feedback
+--------
+
+     If you have any questions or problems with this, please don't hesitate
+     to give me a yell. 
+
+--
+Damien Elmes
+pyosd@repose.cx
+http://repose.cx/pyosd

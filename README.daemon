@@ -1,0 +1,29 @@
+PyOSD daemon
+-------------
+
+PyOSD ships with a simple "daemon", which can help coordinate messages
+so that, say, successive attempts to update a slider bar don't result
+in 5 slider bars displayed over each other, but instead each one
+replaces the former.
+
+To use this daemon,
+
+* create ~/.pyosd/modules, and copy the modules you'd like.
+* install pyosd as per README, then run:
+
+python /usr/lib/python2.1/site-packages/pyosd/daemon.py
+
+(or the path to your location)
+
+* now you can send things to port 8007. try telnet or netcat. example in my sawfish config:
+
+(bind-keys global-keymap
+	"F13" '(system "echo 'vol -5' | nc -q 0 localhost 8007"))
+
+The daemon only binds to localhost, so should not present a security risk from
+external machines.
+
+--
+Damien Elmes
+pyosd@repose.cx
+http://repose.cx/pyosd
